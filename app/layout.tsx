@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+import { CategoryProvider } from "@/components/category-context"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -15,16 +17,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body className={inter.className}>
-        <div className="min-h-screen bg-black">
-          <div className="mx-auto max-w-md">
-            {children}
-          </div>
-        </div>
+        <ThemeProvider>
+          <CategoryProvider>
+            <div className="min-h-screen bg-background">
+              <div className="mx-auto max-w-md">
+                {children}
+              </div>
+            </div>
+          </CategoryProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
